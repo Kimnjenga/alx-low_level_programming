@@ -1,41 +1,27 @@
 #include "main.h"
 
-int _strlen(char *s);
 /**
- * print_rev - prints string in reverse, followed by new line
- * @s: string to be printed in reverse
+ * rev_string - reverses a string
+ * @s: string to be reversed
  * Return: nothing
  *
  */
 
-void print_rev(char *s)
+void rev_string(char *s)
 {
-	int i = 0;
-	int len;
+	int left, i, temp;
 
-	len = _strlen(s);
-
-	while (len > i)
+	left = 0;
+	i = 0;
+	while (s[i] != '\0')
 	{
-		len--;
-		_putchar(*(s + len));
+		i++;
 	}
-	_putchar('\n');
-}
-
-
-/**
- * _strlen - returns the length of a string
- * @s: string whose length is to be determined
- * Return: Always 0
- */
-
-int _strlen(char *s)
-{
-	int a;
-
-	for (a = 0; *s != '\0'; s++) /*counts characters in string until \0. */
-		a++;
-
-	return (a);
+	i--;
+	while (i > left)
+	{
+		temp = s[i];
+		s[i--] = s[left];
+		s[left++] = temp;
+	}
 }
