@@ -1,46 +1,55 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <string.h>
+
 /**
- * main - adds numbers. checks if number
- * @argc: number of arguments
- * @argv: the vector that hold the arguments
- *
- * Description: using arc and argv to achieve the intended function
- * Return: returns 0 if it works or something else if error
- * A: if arg has no nunber inputs then print 0
- * B: if arg has some inputs loop the code via while loop, decrement argc
- * C: loop through the string of argv and check if anything not a digit
- * D: If it is not a digit then enter the error statement
- * E: add the atoi of the arg cause it passed the checks.
- */
-int main(int argc, char **argv)
+ * check_digit - checks if a given char is number or not
+ * @a: input char
+ * Return: int
+ **/
+
+int check_digit(char *a)
 {
-int sum = 0;
-int i = 1;
-int j;
-if (argc == 1)/* A */
-{
-printf("0\n");
-return (0);
+	int i, num, len;
+
+	i = 0;
+	num = 0;
+	len = strlen(a);
+	while (i < len)
+	{
+		if (a[i] < '0' || a[i] > '9')
+		{
+			return (-1);
+		}
+		else
+			num = num * 10 + (a[i] - '0');
+		i++;
+	}
+	return (num);
 }
-while (argc > 1)/* B */
+
+/**
+ * main -  program that works by adding positive numbers
+ * @argc: arguement count
+ * @argv: argument vector
+ * Return: int
+ **/
+
+int main(int argc, char *argv[])
 {
-j = 0;
-while (argv[i][j])/* C */
-{
-if (!isdigit(argv[i][j]))/* D */
-{
-printf("Error\n");
-return (1);
-}
-j++;
-}
-sum += atoi(argv[i]);/* E */
-i++;
-argc--;
-}
-printf("%i\n", sum);
-return (0);
+	int i, num, res;
+
+	res = 0;
+	for (i = 1; i < argc; i++)
+	{
+		num = check_digit(argv[i]);
+		if (num == -1)
+		{
+			printf("Error\n");
+			return (1);
+		}
+		res += num;
+	}
+	printf("%d\n", res);
+	return (0);
 }
