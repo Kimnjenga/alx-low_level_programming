@@ -1,58 +1,45 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 /**
- * main - prints the minumin number of coins for perfect change
- * @argc: number of arguments
- * @argv: the vector that hold the arguments
- *
- * Description: using arc and argv to achieve the intended function
- * Return: returns 0 if it works or something else if error
- * A: if argc does not have only 2 arguments or if the
- *second argument is not a digit
- * B: turn the whole number into an int, then subtract
- *25, 10, 5, 2, and 1. till no more. increase counter and return it
- * C: checks if any non digits in the string.
+ * main - program that prints the minimum number
+ * of coins to make change for an amount of money.
+ * @argc: count
+ * @argv: vector
+ * Return: Always 0 (Success)
  */
 int main(int argc, char **argv)
 {
-int number;
-int count = 0;
-if (argc != 2)/* A */
-{
-printf("Error\n");
-return (1);
-}
-number = atoi(argv[1]);
-while (number > 0)
-{
-while (number >= 25)
-{
-number -= 25;
-count++;
-}
-while (number >= 10)
-{
-number -= 10;
-count++;
-}
-while (number >= 5)
-{
-number -= 5;
-count++;
-}
-while (number >= 2)
-{
-number -= 2;
-count++;
-}
-while (number >= 1)
-{
-number -= 1;
-count++;
-}
-}
-printf("%d\n", count);
-return (0);
+	int ncoins = 0;
+	int cents = atoi(argv[argc - 1]);
+
+	if (argc != 2)
+	{
+		printf("Error\n");
+		return (1);
+	}
+	if (cents <= 0)
+	{
+		printf("0\n");
+		return (0);
+	}
+	while (cents > 0)
+	{
+		ncoins += cents / 25;
+		cents %= 25;
+
+		ncoins += cents / 10;
+		cents %= 10;
+
+		ncoins += cents / 5;
+		cents %= 5;
+
+		ncoins += cents / 2;
+		cents %= 2;
+
+		ncoins += cents;
+		cents %= 1;
+
+	}
+	printf("%d\n", ncoins);
+	return (0);
 }
