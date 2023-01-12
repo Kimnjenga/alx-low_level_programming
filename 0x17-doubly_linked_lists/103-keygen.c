@@ -1,6 +1,6 @@
 /*
 * File: 103-keygen.c
-* Auth: Winga Ronney Isaac 
+* Auth: Kimathi Njoroge 
 */
 #include <stdio.h>
 #include <stdlib.h>
